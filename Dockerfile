@@ -1,8 +1,16 @@
 FROM node:14
+
 WORKDIR /app
-COPY package*.json /app
+
+COPY package*.json ./
+
 RUN npm install
+
+# Install docker-compose
+RUN apt-get update && apt-get install -y docker-compose
+
 COPY . .
-RUN npm install -g docker-compose
-EXPOSE 3005
+
+EXPOSE 3000
+
 CMD ["npm", "start"]
